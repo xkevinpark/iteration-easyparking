@@ -1,0 +1,46 @@
+.profile-page {
+	.card-header {
+		background-color: $super-dark-grey;
+		height: 175px;
+	}
+
+	.profile-picture-card {
+		display: inline-block;
+		margin-right: 25px;
+		position: relative;
+		top: 15px;
+		margin-left: 15px;
+	}
+
+	.profile-name-card {
+		display: inline-block;
+		position: absolute;
+		margin-top: 30px;
+		margin-left: 20px;
+	}
+
+	.username {
+		font-size: 2rem;
+		color: $super-light-gray;
+	}
+
+	.role {
+		color: $menu-gray-title-text;
+	}
+
+	.profile-picture {
+		height: 125px;
+	}
+	.rounded-circle {
+		border-radius: 50% !important;
+	}
+	.card-body {
+		border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+		li {
+			width: 32%;
+			text-align: center;
+			border-right: 1px solid #e6e6e6;
+			display: inline-block;
+		}
+	}
+}

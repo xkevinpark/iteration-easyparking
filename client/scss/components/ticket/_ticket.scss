@@ -1,0 +1,88 @@
+.ticket-page {
+	.container {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	.btn {
+		margin-right: 20px;
+	}
+
+	.comments-section-title {
+		border-top: solid 0.1em $light-grey;
+		width: 100%;
+		margin-bottom: 15px;
+		padding-top: 10px;
+		border-bottom: solid 0.1em $light-grey;
+		padding-bottom: 15px;
+	}
+
+	.comment-head {
+		font-size: medium;
+		strong {
+			margin-right: 10px;
+		}
+	}
+
+	.comment-head {
+		padding-bottom: 20px;
+		padding-left: 20px;
+		border-bottom: 1px solid $light-grey;
+	}
+
+	.comment-author {
+		&.col-12 {
+			padding-left: 0;
+		}
+		&.col-md-6 {
+			padding-left: 0;
+		}
+	}
+
+	.comment-date {
+		margin-left: auto;
+		padding-right: 20px;
+		@include media-breakpoint-up(md) {
+			text-align: end;
+		}
+		&.col-12 {
+			padding-left: 0;
+		}
+		&.col-md-6 {
+			padding-left: 0;
+		}
+	}
+
+	.comment-text {
+		font-size: large;
+		margin-top: 20px;
+	}
+	.card {
+		margin-bottom: 2px;
+	}
+	.comments {
+		.col-md-3 {
+			@include media-breakpoint-up(md) {
+				padding-left: 0;
+				padding-right: 0;
+			}
+		}
+	}
+}
+
+.ticket-comment-form {
+	.submit-button {
+		margin-bottom: 0;
+	}
+}
+
+.comments-list {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.ticket-list {
+	svg {
+		margin-right: 10px;
+		color: darkgoldenrod;
+	}
+}

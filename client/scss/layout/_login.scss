@@ -1,0 +1,22 @@
+.login-page {
+	.form-signin {
+		width: 100%;
+		max-width: 330px;
+		padding: 15px;
+		margin: auto;
+	}
+
+	.login-logo {
+		margin-top: 8%;
+	}
+}
+
+.signup {
+	.input-group-addon {
+		width: 40px;
+		border: black;
+		background-color: $addon-icon-color;
+		line-height: 35px; 
+		text-align: center;
+	}
+}
