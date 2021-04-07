@@ -7,7 +7,7 @@
     "start": "nodemon server/server.js",
     "build": "webpack",
     "dev": "webpack serve & npm start",
-    "test": "test"
+    "test": "jest __tests__ --watch"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,10 @@
     "url": "https://github.com/scratch-21/easyparking/issues"
   },
   "homepage": "https://github.com/scratch-21/easyparking#readme",
+  "jest": {
+    "globalSetup": "./jest-setup.js",
+    "globalTeardown": "./jest-teardown.js"
+  },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
@@ -36,12 +40,19 @@
     "@babel/core": "^7.13.14",
     "@babel/preset-env": "^7.13.12",
     "@babel/preset-react": "^7.13.13",
+    "babel-jest": "^23.6.0",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.0",
+    "enzyme": "^3.7.0",
+    "enzyme-to-json": "^3.3.4",
+    "jest": "^23.6.0",
+    "jest-puppeteer": "^3.4.0",
     "nodemon": "^2.0.7",
+    "puppeteer": "^1.9.0",
     "sass": "^1.32.8",
     "sass-loader": "^10.1.1",
     "style-loader": "^2.0.0",
+    "supertest": "^3.3.0",
     "webpack": "^5.30.0",
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2"
