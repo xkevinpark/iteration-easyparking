@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server/server.js",
     "build": "webpack",
-    "dev": "webpack serve",
+    "dev": "webpack serve & npm start",
     "test": "test"
   },
   "repository": {
