@@ -30,6 +30,8 @@ Given the complexity of our front-end and back-end, we used Webpack to bundle ou
 Used Node & Express to route different async requests to render html page, input/update user info & parking spot info in the database. 
 - [PostgreSQL](https://www.postgresql.org/) & [ElephantSQL](https://www.elephantsql.com/)
 Hosted our relational database in ElephantSQL because the entities in our DB have predefined relationships and can be organized as a set of tables and columns.
+
+NOTE: ER Diagram needs updating to fix type differences, and include Locations table
 ![ER Diagram](https://i.imgur.com/usi7hmE.png)
 
 
@@ -82,8 +84,8 @@ npm run dev
 
 CREATE TABLE "Roles" (
 	"id" serial NOT NULL,
-	"name" serial(255) NOT NULL,
-	"description" serial(255) NOT NULL,
+	"name" VARCHAR(255) NOT NULL,
+	"description" VARCHAR(255) NOT NULL,
 	CONSTRAINT "Roles_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -95,7 +97,7 @@ CREATE TABLE "ParkingSpace" (
 	"id" serial NOT NULL,
 	"status" VARCHAR(255) NOT NULL,
 	"id_user" integer,
-	"expired_time" DATETIME NOT NULL,
+	"expired_time" TIMESTAMP NOT NULL,
 	"locationid" integer NOT NULL,
 	CONSTRAINT "ParkingSpace_pk" PRIMARY KEY ("id")
 ) WITH (
@@ -128,3 +130,10 @@ Jono Calvo [@Jono Calvo](https://github.com/jonocr)
 Mo Hmaidi [@Mo Hmaidi](https://github.com/mhmaidi789)
 Dylan Bury [@Dylan Bury](https://github.com/dylanbury)
 
+**Authors**
+Version 0.2.0:
+Dieu Huynh [@Dieu Huynh]
+Bruno Portela [@Bruno Portela]
+Kevin Park [@Kevin Park]
+David Suh [@David Suh]
+Justin Baik [@Jusin Baik]
