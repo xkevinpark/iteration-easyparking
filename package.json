@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/scratch-21/easyparking#readme",
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
