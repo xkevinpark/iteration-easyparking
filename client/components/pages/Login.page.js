@@ -43,7 +43,8 @@ const LoginPage = () => {
       height: '100vh',
     },
     image: {
-      backgroundImage: 'url(https://source.unsplash.com/random)',
+      //backgroundImage: 'url(https://source.unsplash.com/random)', //get random photos from unsplash
+      backgroundImage: 'url(https://images.unsplash.com/photo-1506521781263-d8422e82f27a)', //
       backgroundRepeat: 'no-repeat',
       backgroundColor:
         theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
