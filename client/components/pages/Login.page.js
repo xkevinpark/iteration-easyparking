@@ -1,66 +1,183 @@
 import React, { useState, useContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/Auth.context';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 
 const LoginPage = () => {
   const history = useHistory();
   const [login, setLogin] = useState();
-	const { user, setUser } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
 
   const signinHandler = (e) => {
-		e.preventDefault();
+    e.preventDefault();
     signin();
-	}
+  }
+
+  function Copyright() {
+    return (
+      <Typography variant="body2" color="textSecondary" align="center">
+        {'Copyright © '}
+        <Link color="inherit" href="https://material-ui.com/">
+          Easy Parking
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+    );
+  }
+
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      height: '100vh',
+    },
+    image: {
+      //backgroundImage: 'url(https://source.unsplash.com/random)', //get random photos from unsplash
+      backgroundImage: 'url(https://images.unsplash.com/photo-1506521781263-d8422e82f27a)', //
+      backgroundRepeat: 'no-repeat',
+      backgroundColor:
+        theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    },
+    paper: {
+      margin: theme.spacing(8, 4),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: '100%', // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }));
+
+  const classes = useStyles();
 
   const signin = () => {
-		fetch(`/user/login`, {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(login),
-		})
-		.then(response => response.json())
-		.then(data => {
-      console.log("signin: ", user);
-			setUser(data);
-      history.push({
-				pathname:`/search-spots`
-			});	
-		})
-  } 
+
+    fetch(`/user/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(login),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log("signin: ", user);
+        setUser(data);
+        history.push({
+          pathname: `/search-spots`
+        });
+      })
+  }
   return (
-    <div className="login-page text-center">
-      <main className="form-signin">
-        <form onSubmit={signinHandler}>
-          <img className="login-logo" src="/assets/scratch-logo.png" alt="" width="200" height="120" />
-          <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
-          <div className="form-floating">
-            <input
-              type="email"
-              className="form-control"
-              id="floatingInput"
-              placeholder="name@example.com"
+    <Grid container component="main" className={classes.root}>
+      <CssBaseline />
+      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <div className={classes.paper}>
+          {/* <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar> */}
+          <img src='assets/easy_parking.png' style={{ height: '60px', width: '60px', marginBottom: '15px' }} />
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <form className={classes.form} noValidate onSubmit={signinHandler}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
               onChange={(e) => setLogin({ ...login, email: e.target.value })}
             />
-
-          </div>
-          <div className="form-floating">
-            <input
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
               type="password"
-              className="form-control"
-              id="floatingPassword"
-              placeholder="Password"
+              id="password"
+              autoComplete="current-password"
               onChange={(e) => setLogin({ ...login, password: e.target.value })}
             />
-
-          </div>
-          <div className="checkbox mb-3">
-              <Link to='/signup'>Create Account</Link>
-          </div>
-          <button className="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-          <p className="mt-5 mb-3 text-muted">© 2017–2021</p>
-        </form>
-      </main>
-    </div>
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Sign In
+            </Button>
+            {/* Okay so these Material UI buttons  */}
+            {/* <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Sign In
+            </Button> */}
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link to='/signup' variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+            <Box mt={5}>
+              <Copyright />
+            </Box>
+          </form>
+          {/* add a button for Google OAuth */}
+          <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                  href='/auth/google' 
+                  >
+                  Sign In With Google
+          </Button>
+        </div>
+      </Grid>
+    </Grid>
   );
 };
 export default LoginPage;
