@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 }));
+
 const MenuComponent = (props) => {
   const { user, setUser } = useContext(AuthContext);
   const history = useHistory();
@@ -45,32 +46,28 @@ const MenuComponent = (props) => {
     setAnchorEl(null);
   };
 
+  const searchHandler = () => {
+
+    fetch('/spot/viewAllSpots')
+      .then(response => response.json())
+      .then(spots => {
+        setSpots(spots);
+      });
+    setAnchorEl(null);
+  };
+
+  const searchavailableHandler = () => {
+    fetch(`/spot/viewAvailableSpots`)
+      .then(response => response.json())
+      .then(spots => {
+        setSpots(spots);
+      });
+    setAnchorEl(null);
+  };
+
   const classes = useStyles();
 
   return (
-    // <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-    //   <div className="container-fluid">
-    //     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-    //       <span className="navbar-toggler-icon"></span>
-    //     </button>
-    //     <div className="collapse navbar-collapse" id="navbarCollapse">
-    //       <ul className="navbar-nav me-auto mb-2 mb-md-0">
-    //         <li className="nav-item">
-    //           <Link className="nav-link" to='/my-profile'>Profile</Link>
-    //         </li>
-    //         <li className="nav-item">
-    //           <Link className="nav-link" to='/search-spots'>Search For Parking</Link>
-    //         </li>
-    //       </ul>
-    //       <form className="d-flex">
-    //         {user ? (
-    //           <div className="me-2">{user[0].first_name}</div>
-    //         ) : ('')}
-    //         <Link className="btn btn-outline-success" to='/' onClick={logOut}>Log Out</Link>
-    //       </form>
-    //     </div>
-    //   </div>
-    // </nav>
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
@@ -84,12 +81,10 @@ const MenuComponent = (props) => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}><Link to='/my-profile'>Profile</Link></MenuItem>
-            <MenuItem onClick={handleClose}><Link to='/search-spots'>Search For Parking</Link></MenuItem>
-            <MenuItem onClick={handleClose}><Link to='/'>View All</Link></MenuItem>
-            <MenuItem onClick={handleClose}><Link to='/'>View Available</Link></MenuItem>
+            <MenuItem onClick={handleClose}><Link style={{ textDecoration: 'none' }} to='/my-profile'>Profile</Link></MenuItem>
+            <MenuItem onClick={handleClose}><Link style={{ textDecoration: 'none' }} to='/search-spots'>Search For Parking</Link></MenuItem>
           </Menu>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" className={classes.title} style={{ textAlign: 'right' }}>
             Welcome, {user[0].first_name}
           </Typography>
         </Toolbar>

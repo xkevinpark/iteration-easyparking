@@ -3,9 +3,9 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const db = require('./Models/ParkingSpotModels.js');
-const passport = require ('passport');
+const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-const dotenv = require ('dotenv');
+const dotenv = require('dotenv');
 dotenv.config()
 
 // Controllers
@@ -22,7 +22,7 @@ const app = express();
 
 // Body parser
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 // initialize passport?
 // app.use(passport.initialize());
@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
 });
 
 // Re-direct to route handlers:
-app.use('/spot', spotRouter); 
+app.use('/spot', spotRouter);
 app.use('/user', userRouter);
 
 // This was a test to check the database connection:
@@ -48,18 +48,18 @@ app.use('/user', userRouter);
 // app.get('/test', (req, res) => {
 //   console.log(db);
 //   let query = 'SELECT * FROM "public"."Roles"';
-  // db.query(query)
-    // .then( data => {
-    //   console.log(data);
-    //   res.json(data);
-    // })
-    // .catch(err => {
-    //   // console.log(err);
-    // })
-  // db.query(query, [], (err, response) => {
-  //   if (err) console.log(err);
-  //     else res.json(response.rows);
-  // })
+// db.query(query)
+// .then( data => {
+//   console.log(data);
+//   res.json(data);
+// })
+// .catch(err => {
+//   // console.log(err);
+// })
+// db.query(query, [], (err, response) => {
+//   if (err) console.log(err);
+//     else res.json(response.rows);
+// })
 // });
 
 // 
@@ -74,7 +74,7 @@ passport.use(new GoogleStrategy({
   callbackURL: "http://localhost:3000/auth/google/callback"
   // userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
 },
-function(accessToken, refreshToken, profile, done) {
+  function (accessToken, refreshToken, profile, done) {
     console.log(profile);
     // User.findOrCreate({ googleId: profile.id }, function (err, user) {
     //   return done(null, false);
@@ -89,10 +89,10 @@ function(accessToken, refreshToken, profile, done) {
 //   redirecting the user to google.com.  After authorization, Google
 //   will redirect the user back to this application at /auth/google/callback
 app.get('/auth/google', (req, res, next) => {
-  console.log ('the route is hitting');
+  console.log('the route is hitting');
   next();
- },
-   passport.authenticate('google', { scope: ['profile', 'email', 'phone'] })
+},
+  passport.authenticate('google', { scope: ['profile', 'email', 'phone'] })
 
   // passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] })
   // passport.authenticate('google', { scope: [' https://www.googleapis.com/oauth2/v3/userinfo'] })
@@ -103,11 +103,11 @@ app.get('/auth/google', (req, res, next) => {
 //   request.  If authentication fails, the user will be redirected back to the
 //   login page.  Otherwise, the primary route function function will be called,
 //   which, in this example, will redirect the user to the home page.
-app.get('/auth/google/callback', 
+app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/giberish' }),
-  function(req, res) {
+  function (req, res) {
     res.redirect('/search-spots');
-});
+  });
 
 
 // Global error handler
@@ -116,4 +116,4 @@ app.use((err, req, res, next) => {
   res.status(500).send('Internal Server Error');
 })
 
-app.listen(PORT, () => { console.log(`Listening on port' ${PORT}...`)});
+app.listen(PORT, () => { console.log(`Listening on port' ${PORT}...`) });

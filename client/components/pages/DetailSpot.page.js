@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useHistory, useLocation } from 'react-router-dom';
 import { AuthContext } from "../contexts/Auth.context";
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 import Menu from '../layout/Menu.layout'
 
@@ -34,7 +36,7 @@ const DetailSpot = (props) => {
     fetch(`/spot/checkin/`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ spotId: spot.id, userId: user[0].id, time:1 }),
+      body: JSON.stringify({ spotId: spot.id, userId: user[0].id, time: 1 }),
     })
       .then(response => response.json())
       .then(data => {
@@ -75,7 +77,7 @@ const DetailSpot = (props) => {
                   ) : (
                     <button href="#" className="btn btn-primary" onClick={checkoutHandler}>Check Out</button>
                   )}
-                  
+
                 </div>
               </div>
             </div>

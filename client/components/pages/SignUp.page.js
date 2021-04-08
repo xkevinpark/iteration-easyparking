@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import GoogleButton from 'react-google-button'
 
 const SignUpPage = () => {
   const [newUser, setNewUser] = useState({ idRole: 1 });
@@ -77,10 +78,10 @@ const SignUpPage = () => {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        {/* <Avatar className={classes.avatar}>
+        <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
-        </Avatar> */}
-        <img src='assets/easy_parking.png' style={{ height: '60px', width: '60px', marginBottom: '15px' }} />
+        </Avatar>
+        {/* <img src='assets/easy_parking.png' style={{ height: '60px', width: '60px', marginBottom: '15px' }} /> */}
         <Typography component="h1" variant="h5">
           Sign up
           </Typography>
