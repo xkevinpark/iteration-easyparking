@@ -58,7 +58,7 @@ describe("Route integration", () => {
         return (
           request(server)
             .post("/spot/newSpot")
-            .send(newData)
+            .send(newData) // NOT PASSING
             // .set("Accept", "application/json")
             // .expect("Content-Type", /application\/json/)
             .expect(200)

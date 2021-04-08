@@ -37,12 +37,12 @@ router.post('/newSpot', spotController.createNewSpot, (req, res) => {
 
 // Check's in parking space user is going to use
 router.patch('/checkin', spotController.checkin, (req, res) => {
-  res.status(200).json({msg : "It worked"})
+  res.status(200).json({ msg: "It worked" })
 })
 
 // Check's out (frees) parking space user is going to use
 router.patch('/checkout', spotController.checkout, (req, res) => {
-  res.status(200).json({msg : "It worked"})
+  res.status(200).json({ msg: "It worked" })
 })
 
 // Delete parking space
@@ -54,22 +54,22 @@ router.delete('/deleteSpot', spotController.deleteSpot, (req, res) => {
 // Test Area
 router.get('/test', (req, res,) => {
   // Store description in constants from req.body
-  const {locationId} = req.body
+  const { locationId } = req.body
 
   // Coerced Date to work with SQL Timestamp type 
-  const d = new Date() + 1000; 
+  const d = new Date() + 1000;
   // let coercedDate = d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0]
-  
+
   // Set default status and expired_time to "open" and date.now. 
   const queryStr = `INSERT INTO "public"."ParkingSpace" (status, id_user, locationid, expired_time) VALUES ('closed', 2, 1, '2021-04-03 18:56:43')`;
   db.query(queryStr)
-  .then(data => {
-    console.log(data)
-    // res.locals.newSpot = data.rows
-    res.json({})
-    // next();
-  })
-  .catch(err => console.log(err))
+    .then(data => {
+      console.log(data)
+      // res.locals.newSpot = data.rows
+      res.json({})
+      // next();
+    })
+    .catch(err => console.log(err))
 
 })
 
