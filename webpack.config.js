@@ -24,7 +24,7 @@ const rules = [{
 
 
 module.exports = {
-  mode: 'development',
+  mode: process.env.NODE_ENV,
   entry : path.resolve(__dirname, './client/index.js'),
   output:{
     path: path.resolve(__dirname, 'build'),
@@ -37,13 +37,10 @@ module.exports = {
 
   devServer: {
     publicPath: '/build',
+    compress: true,
+    port: 8080,
     proxy: {
-      '/spot': {
-        target: 'http://localhost:3000/'
-      },
-      '/user': {
-        target: 'http://localhost:3000/'
-      }
+      '/':'http://localhost:3000/'
     },
   }
 }
