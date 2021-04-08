@@ -7,7 +7,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import LinkUI from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -43,7 +42,8 @@ const LoginPage = () => {
       height: '100vh',
     },
     image: {
-      backgroundImage: 'url(https://source.unsplash.com/random)',
+      //backgroundImage: 'url(https://source.unsplash.com/random)', //get random photos from unsplash
+      backgroundImage: 'url(https://images.unsplash.com/photo-1506521781263-d8422e82f27a)', //
       backgroundRepeat: 'no-repeat',
       backgroundColor:
         theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
@@ -93,9 +93,10 @@ const LoginPage = () => {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
+          {/* <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
-          </Avatar>
+          </Avatar> */}
+          <img src='assets/easy_parking.png' style={{ height: '60px', width: '60px', marginBottom: '15px' }} />
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
