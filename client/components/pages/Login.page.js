@@ -7,7 +7,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import LinkUI from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -94,9 +93,10 @@ const LoginPage = () => {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
+          {/* <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
-          </Avatar>
+          </Avatar> */}
+          <img src='assets/easy_parking.png' style={{ height: '60px', width: '60px', marginBottom: '15px' }} />
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
