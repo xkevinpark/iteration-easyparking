@@ -68,7 +68,6 @@ app.listen(PORT, () => {
 });
 
 // FOR IF jest-teardown.js keeps returning TypeError: testServer.close is not a function
-// const server = app.listen(PORT, () => {
+// const app = app.listen(PORT, () => {
 //   console.log(`Listening on port' ${PORT}...`);
 // });
-// module.exports = server;
