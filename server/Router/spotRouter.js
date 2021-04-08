@@ -31,6 +31,7 @@ router.get('/viewSpot/:id', spotController.viewSpotById, (req, res) => {
 
 // Create new parking space
 router.post('/newSpot', spotController.createNewSpot, (req, res) => {
+  // console.log(res.locals.newSpot)
   res.status(200).json(res.locals.newSpot)
 })
 
