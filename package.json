@@ -5,15 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/server.js",
-<<<<<<< HEAD
-    "build": "webpack",
-    "dev": "webpack serve & npm start",
-    "test": "test"
-=======
     "build": "NODE_ENV=production webpack",
     "dev": "concurrently \"NODE_ENV=development webpack-dev-server --open --hot --inline --progress --colors --watch --content-base ./\" \"nodemon ./server/server.js\"",
-    "test": "test jest --watch"
->>>>>>> a2b9e660c36bca215053b7edf7248fd570510d2c
+    "test": "jest --watchAll"
   },
   "repository": {
     "type": "git",
