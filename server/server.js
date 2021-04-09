@@ -5,8 +5,13 @@ const path = require('path');
 const db = require('./Models/ParkingSpotModels.js');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+<<<<<<< HEAD
 const dotenv = require('dotenv');
 dotenv.config()
+=======
+// const dotenv = require ('dotenv');
+// dotenv.config()
+>>>>>>> main
 
 // Controllers
 const userController = require('./Controllers/userController');
@@ -28,7 +33,7 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(passport.initialize());
 
 
-// Serve static file build route 
+// Serve static file build route
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
 //Enable Cors
@@ -62,12 +67,13 @@ app.use('/user', userRouter);
 // })
 // });
 
-// 
+//
 
 // Use the GoogleStrategy within Passport.
 //   Strategies in Passport require a `verify` function, which accept
 //   credentials (in this case, an accessToken, refreshToken, and Google
 //   profile), and invoke a callback with a user object.
+<<<<<<< HEAD
 passport.use(new GoogleStrategy({
   clientID: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
@@ -82,6 +88,22 @@ passport.use(new GoogleStrategy({
     return done(null, profile);
   }
 ));
+=======
+// passport.use(new GoogleStrategy({
+//   clientID: process.env.CLIENT_ID,
+//   clientSecret: process.env.CLIENT_SECRET,
+//   callbackURL: "http://localhost:3000/auth/google/callback"
+//   // userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
+// },
+// function(accessToken, refreshToken, profile, done) {
+//     console.log(profile);
+//     // User.findOrCreate({ googleId: profile.id }, function (err, user) {
+//     //   return done(null, false);
+//     // });
+//     return done(null, profile);
+//   }
+// ));
+>>>>>>> main
 
 // GET /auth/google
 //   Use passport.authenticate() as route middleware to authenticate the
