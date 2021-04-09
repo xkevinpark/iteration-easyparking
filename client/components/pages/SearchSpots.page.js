@@ -69,17 +69,8 @@ const SearchSpotsPage = (props) => {
           <div className="container">
             <div className="dashboard-bar dashboard">Spot Search</div>
             <div className="row search-item">
-              <div className="col-3">
-              </div>
-              <a className="btn btn-primary" href="#" role="button" onClick={searchHandler}>View All</a>
-              <a className="btn btn-primary" href="#" role="button" onClick={searchavailableHandler}>View Available</a>
-              <div className="col-3">
-              </div>
-              <div className="col-2">
-              </div>
-
-              <div className="col-4">
-              </div>
+              <a style={{ marginLeft: '15px' }} className="btn btn-primary" href="#" role="button" onClick={searchHandler}>View All</a>
+              <a style={{ marginLeft: '15px' }} className="btn btn-primary" href="#" role="button" onClick={searchavailableHandler}>View Available</a>
             </div>
             <div className="dashboard-main dashboard">
               <SpotList spots={spots} onClick={handleClick}></SpotList>
