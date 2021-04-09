@@ -3,10 +3,10 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const db = require('./Models/ParkingSpotModels.js');
-const passport = require ('passport');
+const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-// const dotenv = require ('dotenv');
-// dotenv.config()
+const dotenv = require('dotenv');
+dotenv.config()
 
 // Controllers
 const userController = require('./Controllers/userController');
@@ -22,10 +22,7 @@ const app = express();
 
 // Body parser
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-
-// initialize passport?
-// app.use(passport.initialize());
+app.use(express.urlencoded({ extended: true }));
 
 
 // Serve static file build route
@@ -43,72 +40,116 @@ app.get('/', (req, res) => {
 app.use('/spot', spotRouter);
 app.use('/user', userRouter);
 
-// This was a test to check the database connection:
 
-// app.get('/test', (req, res) => {
-//   console.log(db);
-//   let query = 'SELECT * FROM "public"."Roles"';
-  // db.query(query)
-    // .then( data => {
-    //   console.log(data);
-    //   res.json(data);
-    // })
-    // .catch(err => {
-    //   // console.log(err);
-    // })
-  // db.query(query, [], (err, response) => {
-  //   if (err) console.log(err);
-  //     else res.json(response.rows);
-  // })
-// });
+// initialize passport
+app.use(passport.initialize());
 
-//
+const verifyCallBackGoogle = (accessToken, refreshToken, profile, done) => {
+  const firstName = profile.name.givenName;
+  const lastName = profile.name.familyName;
+  const userEmail = profile.emails[0].value;
+  const userPassword = profile.id;
+  console.log(userEmail);
+  console.log(userPassword);
+
+  // create googleUser, containing {idRole: 1, firstName, lastName, email: profile.emails[0].value, password: profile.id}
+  const googleUser = { idRole: 1, firstName: firstName, lastName: lastName, email: userEmail, password: userPassword };
+  const selectStr = `SELECT * FROM "public"."Users" WHERE email = $1`
+
+
+  // check if user is on database 
+  // query check SELECT * from "Users" WHERE email = profile.emails[0].value
+  db.query(selectStr, [userEmail])
+    .then(currentUser => {
+      console.log('query succesfully come back');
+      // if (the return is empty)
+      console.log(currentUser.rows);
+      console.log(currentUser.rows[0]);
+      if (!currentUser.rows[0]) {
+        // send fetch POST request to user/sign up
+        console.log('start creating');
+        () => {
+          fetch(`/user/signup`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(googleUser),
+          }).catch(err => console.log(err));
+          // .then(response => response.json())
+          // .then(data => {
+          //   console.log('user got added?')
+          //   history.push('/');
+          // })
+        }
+
+
+        // send fetch request to user/login to validate user & password using userController.login
+        //  () => {
+        //        fetch(`/user/login`, {
+        //          method: "POST",
+        //          headers: { "Content-Type": "application/json" },
+        //          body: JSON.stringify(googleUser),
+        //        })
+        //          .then(response => response.json())
+        //          .then(data => {
+        //            console.log("signin: ", user);
+        //            setUser(data);
+        //            history.push({
+        //              pathname: `/search-spots`
+        //            });
+        //          })
+        //      }
+      }
+    })
+  // 
+
+
+}
+
+
+
+
 
 // Use the GoogleStrategy within Passport.
 //   Strategies in Passport require a `verify` function, which accept
 //   credentials (in this case, an accessToken, refreshToken, and Google
 //   profile), and invoke a callback with a user object.
-// passport.use(new GoogleStrategy({
-//   clientID: process.env.CLIENT_ID,
-//   clientSecret: process.env.CLIENT_SECRET,
-//   callbackURL: "http://localhost:3000/auth/google/callback"
-//   // userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
-// },
-// function(accessToken, refreshToken, profile, done) {
-//     console.log(profile);
-//     // User.findOrCreate({ googleId: profile.id }, function (err, user) {
-//     //   return done(null, false);
-//     // });
-//     return done(null, profile);
-//   }
-// ));
+passport.use(new GoogleStrategy({
+  clientID: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+  callbackURL: "http://localhost:3000/auth/google/callback"
+},
+  verifyCallBackGoogle
+));
 
-// GET /auth/google
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  The first step in Google authentication will involve
-//   redirecting the user to google.com.  After authorization, Google
-//   will redirect the user back to this application at /auth/google/callback
-app.get('/auth/google', (req, res, next) => {
-  console.log ('the route is hitting');
-  next();
- },
-   passport.authenticate('google', { scope: ['profile', 'email', 'phone'] })
 
-  // passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] })
-  // passport.authenticate('google', { scope: [' https://www.googleapis.com/oauth2/v3/userinfo'] })
-);
-
-// GET /auth/google/callback
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  If authentication fails, the user will be redirected back to the
-//   login page.  Otherwise, the primary route function function will be called,
-//   which, in this example, will redirect the user to the home page.
-app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/giberish' }),
-  function(req, res) {
-    res.redirect('/search-spots');
+// serialize
+passport.serializeUser((user, done) => {
+  done(null, user.id);
 });
 
+// // deserialize
+// passport.deserializeUser((id, done) => {
+//   User.findById(id, (err, user) => {
+//     done(err, user);
+//   });
+// });
+
+// GET /auth/google
+// 1
+app.get('/auth/google', (req, res, next) => {
+  console.log('the route is hitting');
+  next();
+},
+  passport.authenticate('google', { scope: ['profile', 'email', 'phone'] })
+);
+
+// GET /auth/google/callback after Google user has logged in
+app.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/' }),
+  function (req, res) {
+    console.log('2');
+    res.redirect('/search-spots');
+  });
 
 // Global error handler
 app.use((err, req, res, next) => {
@@ -116,4 +157,4 @@ app.use((err, req, res, next) => {
   res.status(500).send('Internal Server Error');
 })
 
-app.listen(PORT, () => { console.log(`Listening on port' ${PORT}...`)});
+app.listen(PORT, () => { console.log(`Listening on port' ${PORT}...`) });
