@@ -3,10 +3,12 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const db = require('./Models/ParkingSpotModels.js');
-const passport = require ('passport');
+const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
 // const dotenv = require ('dotenv');
 // dotenv.config()
+
 
 // Controllers
 const userController = require('./Controllers/userController');
@@ -22,7 +24,7 @@ const app = express();
 
 // Body parser
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 // initialize passport?
 // app.use(passport.initialize());
@@ -48,18 +50,18 @@ app.use('/user', userRouter);
 // app.get('/test', (req, res) => {
 //   console.log(db);
 //   let query = 'SELECT * FROM "public"."Roles"';
-  // db.query(query)
-    // .then( data => {
-    //   console.log(data);
-    //   res.json(data);
-    // })
-    // .catch(err => {
-    //   // console.log(err);
-    // })
-  // db.query(query, [], (err, response) => {
-  //   if (err) console.log(err);
-  //     else res.json(response.rows);
-  // })
+// db.query(query)
+// .then( data => {
+//   console.log(data);
+//   res.json(data);
+// })
+// .catch(err => {
+//   // console.log(err);
+// })
+// db.query(query, [], (err, response) => {
+//   if (err) console.log(err);
+//     else res.json(response.rows);
+// })
 // });
 
 //
@@ -68,6 +70,7 @@ app.use('/user', userRouter);
 //   Strategies in Passport require a `verify` function, which accept
 //   credentials (in this case, an accessToken, refreshToken, and Google
 //   profile), and invoke a callback with a user object.
+
 // passport.use(new GoogleStrategy({
 //   clientID: process.env.CLIENT_ID,
 //   clientSecret: process.env.CLIENT_SECRET,
@@ -83,16 +86,17 @@ app.use('/user', userRouter);
 //   }
 // ));
 
+
 // GET /auth/google
 //   Use passport.authenticate() as route middleware to authenticate the
 //   request.  The first step in Google authentication will involve
 //   redirecting the user to google.com.  After authorization, Google
 //   will redirect the user back to this application at /auth/google/callback
 app.get('/auth/google', (req, res, next) => {
-  console.log ('the route is hitting');
+  console.log('the route is hitting');
   next();
- },
-   passport.authenticate('google', { scope: ['profile', 'email', 'phone'] })
+},
+  passport.authenticate('google', { scope: ['profile', 'email', 'phone'] })
 
   // passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] })
   // passport.authenticate('google', { scope: [' https://www.googleapis.com/oauth2/v3/userinfo'] })
@@ -105,9 +109,9 @@ app.get('/auth/google', (req, res, next) => {
 //   which, in this example, will redirect the user to the home page.
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/giberish' }),
-  function(req, res) {
+  function (req, res) {
     res.redirect('/search-spots');
-});
+  });
 
 
 // Global error handler
@@ -116,4 +120,4 @@ app.use((err, req, res, next) => {
   res.status(500).send('Internal Server Error');
 })
 
-app.listen(PORT, () => { console.log(`Listening on port' ${PORT}...`)});
+app.listen(PORT, () => { console.log(`Listening on port' ${PORT}...`) });
