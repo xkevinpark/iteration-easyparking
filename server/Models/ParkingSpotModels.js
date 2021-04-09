@@ -5,7 +5,7 @@ const PG_URI = 'postgres://dxdrlmec:JnQgRDLCzBiqGS708chEK4v7B_epxPcS@ziggy.db.el
 const pool = new Pool({
     connectionString: PG_URI
   });
-  
+
   module.exports = {
     query: (text, params, callback) => {
       console.log('executed query', text);

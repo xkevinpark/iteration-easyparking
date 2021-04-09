@@ -8,6 +8,7 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const dotenv = require('dotenv');
 dotenv.config()
 
+
 // Controllers
 const userController = require('./Controllers/userController');
 const spotController = require('./Controllers/spotController');
@@ -133,6 +134,7 @@ passport.serializeUser((user, done) => {
 //     done(err, user);
 //   });
 // });
+
 
 // GET /auth/google
 // 1

@@ -6,9 +6,6 @@ header {
 	background-color: $head-menu-bar;
 	height: 70px;
 	line-height: 70px;
-	@include media-breakpoint-up(md) {
-		padding-left: 280px;
-	}
 }
 
 .top-bar {

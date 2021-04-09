@@ -13,6 +13,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import GoogleButton from 'react-google-button'
 
 const LoginPage = () => {
   const history = useHistory();
@@ -93,10 +94,10 @@ const LoginPage = () => {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          {/* <Avatar className={classes.avatar}>
+          <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
-          </Avatar> */}
-          <img src='assets/easy_parking.png' style={{ height: '60px', width: '60px', marginBottom: '15px' }} />
+          </Avatar>
+          {/* <img src='assets/easy_parking.png' style={{ height: '60px', width: '60px', marginBottom: '15px' }} /> */}
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
@@ -138,16 +139,6 @@ const LoginPage = () => {
             >
               Sign In
             </Button>
-            {/* Okay so these Material UI buttons  */}
-            {/* <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Sign In
-            </Button> */}
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
@@ -160,21 +151,18 @@ const LoginPage = () => {
                 </Link>
               </Grid>
             </Grid>
+            <hr data-content='test'></hr>
+            <div style={{ display: "flex", justifyContent: 'center', alignItems: 'center' }}>
+              <a href="/auth/google" style={{ textDecoration: 'none' }}>
+                <GoogleButton
+                  onClick={() => { console.log('Google button clicked') }}
+                />
+              </a>
+            </div>
             <Box mt={5}>
               <Copyright />
             </Box>
           </form>
-          {/* add a button for Google OAuth */}
-          <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}
-                  href='/auth/google' 
-                  >
-                  Sign In With Google
-          </Button>
         </div>
       </Grid>
     </Grid>

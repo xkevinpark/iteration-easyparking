@@ -44,7 +44,7 @@ describe("Route integration", () => {
           .expect(200);
       });
     });
-    describe("POST", () => {
+    xdescribe("POST", () => {
       // const queryStr = `INSERT INTO "public"."ParkingSpace" (status, locationid, expired_time) VALUES ('open', ${locationId}, '${coercedDate}')`;
       const currentTime = new Date();
       let coercedDate = currentTime.toISOString().split('T')[0]+' '+currentTime.toTimeString().split(' ')[0]
